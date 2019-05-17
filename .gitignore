@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Sources/Phenix-challenge/Phenix.Challenge.Console/obj
+/Sources/Phenix-challenge/.vs/Phenix-challenge
+/.vs
