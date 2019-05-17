@@ -16,9 +16,7 @@ namespace Phenix.ChallengeConsole
         };
         static void Main(string[] args)
         {
-            // Transaction : 
-            // txId|datetime|magasin|produit|qte
-            // 1 |20170514T223544+0100|2a4b6b81-5aa2-4ad8-8ba9-ae1a006e7d71|531|5
+            
 
             // Referenciel Produit
             // produit|prix

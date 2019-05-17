@@ -5,3 +5,6 @@
 /Sources/Phenix-challenge/Phenix.Challenge.Console/obj
 /Sources/Phenix-challenge/.vs/Phenix-challenge
 /.vs
+/Sources/Phenix-challenge/Phenix.Challenge.Domain.Tests/obj
+/Sources/Phenix-challenge/Phenix.Challenge.Domain.Tests/bin/Debug/netcoreapp2.1
+/Sources/Phenix-challenge/Phenix.Challenge.Domain/obj

@@ -1,10 +1,12 @@
-Le but de cet exercice est de déterminer la capacité du candidat à implémenter une réponse complète à un besoin concret, avec une solution efficace respectant les contraintes, et un code de qualité. 
+Le but de cet exercice est de déterminer la capacité du candidat à implémenter une réponse complète à un besoin concret, avec une solution efficace respectant les contraintes, 
+et un code de qualité. 
 
 
 Énoncé:
 --------
 
-Nos magasins produisent tous les jours des fichiers de logs contenant les informations relatives à leur activité de vente journalière. De plus, chaque magasin possède son propre référentiel de prix journalier.
+Nos magasins produisent tous les jours des fichiers de logs contenant les informations relatives à leur activité de vente journalière. De plus, 
+chaque magasin possède son propre référentiel de prix journalier.
 
 
 Le fichier des transactions journalières contient ces infos: `txId|datetime|magasin|produit|qte`
