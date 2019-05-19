@@ -1,17 +1,34 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28902.138
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Phenix.Challenge.Console", "Phenix.Challenge.Console\Phenix.Challenge.Console.csproj", "{31F7157C-7748-4F98-873C-EE85A1AC1635}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phenix.Challenge.Domain.Tests", "Phenix.Challenge.Domain.Tests\Phenix.Challenge.Domain.Tests.csproj", "{B716F88F-5742-4031-A906-6AAAD9171EF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Phenix.Challenge.Domain.Tests", "Phenix.Challenge.Domain.Tests\Phenix.Challenge.Domain.Tests.csproj", "{B716F88F-5742-4031-A906-6AAAD9171EF1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phenix.Challenge.Domain", "Phenix.Challenge.Domain\Phenix.Challenge.Domain.csproj", "{F70B49B9-1272-4AEA-8DCF-896E32CBD460}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Phenix.Challenge.Domain", "Phenix.Challenge.Domain\Phenix.Challenge.Domain.csproj", "{F70B49B9-1272-4AEA-8DCF-896E32CBD460}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ressources", "Ressources", "{C764E2CF-F92B-4EBA-8DE2-F847A55ABCC3}"
 	ProjectSection(SolutionItems) = preProject
 		..\..\README.md = ..\..\README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{0C875F82-13F9-4BF7-ADCF-D2752025F2C5}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\data\reference_prod-10f2f3e6-f728-41f3-b079-43b0aa758292_20170514.data = ..\..\data\reference_prod-10f2f3e6-f728-41f3-b079-43b0aa758292_20170514.data
+		..\..\data\reference_prod-29366c83-eae9-42d3-a8af-f15339830dc5_20170514.data = ..\..\data\reference_prod-29366c83-eae9-42d3-a8af-f15339830dc5_20170514.data
+		..\..\data\reference_prod-2a4b6b81-5aa2-4ad8-8ba9-ae1a006e7d71_20170514.data = ..\..\data\reference_prod-2a4b6b81-5aa2-4ad8-8ba9-ae1a006e7d71_20170514.data
+		..\..\data\reference_prod-6af0502b-ce7a-4a6f-b5d3-516d09514095_20170514.data = ..\..\data\reference_prod-6af0502b-ce7a-4a6f-b5d3-516d09514095_20170514.data
+		..\..\data\reference_prod-72a2876c-bc8b-4f35-8882-8d661fac2606_20170514.data = ..\..\data\reference_prod-72a2876c-bc8b-4f35-8882-8d661fac2606_20170514.data
+		..\..\data\reference_prod-8e588f2f-d19e-436c-952f-1cdd9f0b12b0_20170514.data = ..\..\data\reference_prod-8e588f2f-d19e-436c-952f-1cdd9f0b12b0_20170514.data
+		..\..\data\reference_prod-af068240-8198-4b79-9cf9-c28c0db65f63_20170514.data = ..\..\data\reference_prod-af068240-8198-4b79-9cf9-c28c0db65f63_20170514.data
+		..\..\data\reference_prod-bdc2a431-797d-4b07-9567-67c565a67b84_20170514.data = ..\..\data\reference_prod-bdc2a431-797d-4b07-9567-67c565a67b84_20170514.data
+		..\..\data\reference_prod-bf0999da-ae45-49df-983e-89020198330b_20170514.data = ..\..\data\reference_prod-bf0999da-ae45-49df-983e-89020198330b_20170514.data
+		..\..\data\reference_prod-d4bfbabf-0160-4e87-8688-78e0943a396a_20170514.data = ..\..\data\reference_prod-d4bfbabf-0160-4e87-8688-78e0943a396a_20170514.data
+		..\..\data\reference_prod-dd43720c-be43-41b6-bc4a-ac4beabd0d9b_20170514.data = ..\..\data\reference_prod-dd43720c-be43-41b6-bc4a-ac4beabd0d9b_20170514.data
+		..\..\data\reference_prod-e3d54d00-18be-45e1-b648-41147638bafe_20170514.data = ..\..\data\reference_prod-e3d54d00-18be-45e1-b648-41147638bafe_20170514.data
+		..\..\data\transactions_20170514.data = ..\..\data\transactions_20170514.data
 	EndProjectSection
 EndProject
 Global
@@ -35,6 +52,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0C875F82-13F9-4BF7-ADCF-D2752025F2C5} = {C764E2CF-F92B-4EBA-8DE2-F847A55ABCC3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9C0B9CBC-8029-4AD8-BBE0-D17260F9044C}
