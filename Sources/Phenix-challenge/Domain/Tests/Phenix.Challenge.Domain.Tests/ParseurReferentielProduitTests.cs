@@ -13,12 +13,16 @@ namespace Phenix.Challenge.Domain.Tests
         public void ParseReferentielProduit(string ligne)
         {
             // Arrange
-
+            var date = new DateTime(2017, 05, 14);
+            var guidMagasin = new Guid("2a4b6b81-5aa2-4ad8-8ba9-ae1a006e7d71");
+            
             // Act
-            var referentielProduit = ParseurReferentielProduit.Parse(ligne);
+            var referentielProduit = ParseurReferentielProduit.Parse(ligne, guidMagasin, date);
             // Assert
             referentielProduit.ProduitId.Should().Be(1);
             referentielProduit.Prix.Should().Be(4.7M);
+            referentielProduit.Date.Should().Be(date);
+            referentielProduit.Magasin.Should().Be(guidMagasin);
         }
 
 
@@ -31,7 +35,7 @@ namespace Phenix.Challenge.Domain.Tests
             // Arrange
 
             // Act
-            Action implementation = () => ParseurReferentielProduit.Parse(ligne);
+            Action implementation = () => ParseurReferentielProduit.Parse(ligne, new Guid("2a4b6b81-5aa2-4ad8-8ba9-ae1a006e7d71"), new DateTime(2017, 05, 14));
 
             // Assert
             implementation.Should().Throw<ErrorParseException>();

@@ -15,3 +15,8 @@
 /Sources/Phenix-challenge/Domain/Tests/Phenix.Challenge.Domain.Tests/bin/Debug/netcoreapp2.1
 /Sources/Phenix-challenge/Domain/Tests/Phenix.Challenge.Domain.Tests/obj
 /Sources/Phenix-challenge/Domain/Phenix.Challenge.Domain/obj
+/Sources/Phenix-challenge/Infrastructure/Phenix.Challenge.Infrastructure/obj/Debug/netstandard2.0
+/Sources/Phenix-challenge/Infrastructure/Phenix.Challenge.Infrastructure/bin/Debug/netstandard2.0
+/Sources/Phenix-challenge/Infrastructure/Tests/Infrastructure.Tests/obj
+/Sources/Phenix-challenge/Infrastructure/Tests/Infrastructure.Tests/bin/Debug/netcoreapp2.1
+/Sources/Phenix-challenge/Infrastructure/Phenix.Challenge.Infrastructure/obj

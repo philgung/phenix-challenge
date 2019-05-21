@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace Phenix.ChallengeConsole
@@ -16,12 +17,12 @@ namespace Phenix.ChallengeConsole
         };
         static void Main(string[] args)
         {
+
+            // Parseurs !
+            // Infrastructure -> array[]
+            // array[] -> filtre -> parseur -> Object !
+
             
-
-            // Referenciel Produit
-            // produit|prix
-            // 1|4.7
-
             Console.WriteLine("Hello World!");
 
 

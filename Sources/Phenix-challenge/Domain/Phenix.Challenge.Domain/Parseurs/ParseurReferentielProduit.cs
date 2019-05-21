@@ -1,10 +1,11 @@
 ﻿using Phenix.Challenge.Domain.Exceptions;
+using System;
 
 namespace Phenix.Challenge.Domain.Parseurs
 {
     public class ParseurReferentielProduit
     {
-        public static ReferentielProduit Parse(string ligne)
+        public static ReferentielProduit Parse(string ligne, Guid magasin, DateTime date)
         {
             if (string.IsNullOrEmpty(ligne)) throw new ErrorParseException();
             var elements = ligne.Split('|');
@@ -19,7 +20,9 @@ namespace Phenix.Challenge.Domain.Parseurs
             return new ReferentielProduit
             {
                 ProduitId = produitId,
-                Prix = prix
+                Prix = prix,
+                Magasin = magasin,
+                Date = date
             };
         }
     }
