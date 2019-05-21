@@ -33,7 +33,7 @@ namespace Phenix.Challenge.Domain.Tests
             // Act
             Action parseImpl = () => ParseurDate.Parse(dateFormatIso8601);
             // Assert
-            parseImpl.Should().Throw<ErrorParseTransactionException>();
+            parseImpl.Should().Throw<ErrorParseException>();
         }
     }
 }

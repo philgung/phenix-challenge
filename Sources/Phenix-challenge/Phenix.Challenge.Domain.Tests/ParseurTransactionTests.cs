@@ -32,14 +32,14 @@ namespace Phenix.Challenge.Domain.Tests
         [InlineData("")]
         [InlineData(null)]
         [InlineData("1|20170514T223544+0100|2a4b6b81-5aa2-4ad8-8ba9-ae1a006e7d71|531")]
-        public void CreerUneTransaction_renvoi_ErrorParseTransactionException(string ligne)
+        public void CreerUneTransaction_renvoi_ErrorParseException(string ligne)
         {
             // Arrange
 
             // Act
             Action creerUneTransactionImpl = () => ParseurTransaction.Parse(ligne);
             // Assert
-            creerUneTransactionImpl.Should().Throw<ErrorParseTransactionException>();
+            creerUneTransactionImpl.Should().Throw<ErrorParseException>();
         }
     }
 }

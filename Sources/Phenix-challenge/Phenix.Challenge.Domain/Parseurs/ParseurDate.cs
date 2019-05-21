@@ -13,7 +13,7 @@ namespace Phenix.Challenge.Domain.Parseurs
             }
             catch (FormatException ex)
             {
-                throw new ErrorParseTransactionException("{dateFormatIso8601} est invalide", ex);
+                throw new ErrorParseException("{dateFormatIso8601} est invalide", ex);
             }            
         }
     }
