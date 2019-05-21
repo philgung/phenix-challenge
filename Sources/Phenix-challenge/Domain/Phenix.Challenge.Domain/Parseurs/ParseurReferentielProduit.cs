@@ -1,5 +1,6 @@
 ﻿using Phenix.Challenge.Domain.Exceptions;
 using System;
+using System.Globalization;
 
 namespace Phenix.Challenge.Domain.Parseurs
 {
@@ -14,7 +15,7 @@ namespace Phenix.Challenge.Domain.Parseurs
             if (!int.TryParse(elements[0], out int produitId))
                 throw new ErrorParseException($"{ligne} - {elements[0]} est invalide.");
 
-            if (!decimal.TryParse(elements[1], out decimal prix))
+            if (!decimal.TryParse(elements[1], NumberStyles.Any, new CultureInfo("en-US"), out decimal prix))
                 throw new ErrorParseException($"{ligne} - {elements[1]} est invalide.");
 
             return new ReferentielProduit
