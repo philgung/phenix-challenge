@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Phenix.Challenge.Domain\Phenix.Challenge.Domain.csproj" />
+    <ProjectReference Include="..\..\Phenix.Challenge.Domain\Phenix.Challenge.Domain.csproj" />
   </ItemGroup>
 
 </Project>
