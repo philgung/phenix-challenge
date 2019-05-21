@@ -13,24 +13,27 @@ namespace Phenix.Challenge.Infrastructure
         {
         }
 
-        public IEnumerable<Domain.Transaction> LitTransactions(string fileName)
+        public IEnumerable<Transaction> LitTransactions(string cheminFichier)
         {
-            var lignes = File.ReadAllLines(fileName);
-            return lignes.Select(ligne => ParseurTransaction.Parse(ligne));
+            return Lit(cheminFichier, ligne => ParseurTransaction.Parse(ligne));
         }
 
         public IEnumerable<ReferentielProduit> LitReferentielProduit(string cheminFichier)
         {
-            // TODO : check fileName
+            return Lit(cheminFichier, ligne =>
+            {
+                var nomFichier = Path.GetFileName(cheminFichier);
+                var guidMagasin = new Guid(nomFichier.Substring(15, 36));
+                var date = DateTime.ParseExact(nomFichier.Substring(52, 8), "yyyyMMdd", null);
+                return ParseurReferentielProduit.Parse(ligne, guidMagasin, date);
+            });
+        }
 
-            var nomFichier = Path.GetFileName(cheminFichier);
-            // reference_prod-2a4b6b81-5aa2-4ad8-8ba9-ae1a006e7d71_20170514.data
-            var guidMagasin = new Guid(nomFichier.Substring(15, 36));
-            var date = DateTime.ParseExact(nomFichier.Substring(52, 8), "yyyyMMdd", null);
-
-
+        public IEnumerable<T> Lit<T>(string cheminFichier, Func<string, T> impl)
+        {
+            // TODO : check fileName    
             var lignes = File.ReadAllLines(cheminFichier);
-            return lignes.Select(ligne => ParseurReferentielProduit.Parse(ligne, guidMagasin, date));
+            return lignes.Select(ligne => impl(ligne));
         }
     }
 }
