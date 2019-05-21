@@ -17,11 +17,13 @@ namespace Phenix.ChallengeConsole
         };
         static void Main(string[] args)
         {
+            // création rapport
 
-            // Parseurs !
-            // Infrastructure -> array[]
-            // array[] -> filtre -> parseur -> Object !
+            // remplissage rapport du dossier data
 
+            // Génération rapports
+
+            // Export rapports en fichier.
             
             Console.WriteLine("Hello World!");
 
