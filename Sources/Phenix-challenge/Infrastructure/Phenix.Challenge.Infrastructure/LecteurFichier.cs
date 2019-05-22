@@ -1,5 +1,6 @@
 ﻿using Phenix.Challenge.Domain;
 using Phenix.Challenge.Domain.Parseurs;
+using Phenix.Challenge.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,7 +8,7 @@ using System.Linq;
 
 namespace Phenix.Challenge.Infrastructure
 {
-    public class LecteurFichier
+    public class LecteurFichier : ILecteurFichier
     {
         public LecteurFichier()
         {

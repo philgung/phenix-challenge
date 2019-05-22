@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Phenix.Challenge.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,15 @@ namespace Phenix.Challenge.Domain
         IEnumerable<Transaction> _transactionDuJour;
         //  Les référentiels par magasin
         Dictionary<Guid, IEnumerable<ReferentielProduit>> _referentielsParMagasin;
+        private readonly ILecteurFichier lecteurFichier;
+
+        public RapportJournalier(ILecteurFichier lecteurFichier)
+        {
+            this.lecteurFichier = lecteurFichier;
+            
+        }
+
+
 
         // Nous avons besoin de déterminer, chaque jour, 
         // les 100 produits qui ont les meilleures ventes par magasin 
