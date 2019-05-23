@@ -1,5 +1,4 @@
 using FluentAssertions;
-using Phenix.Challenge.Domain;
 using Phenix.Challenge.Infrastructure;
 using System;
 using System.Linq;
@@ -10,6 +9,8 @@ namespace Infrastructure.Tests
     public class LecteurFichierTests
     {
         const string _dossierRacine = "../../../../../../../../data/";
+        DateTime dateDuJour = new DateTime(2017, 05, 14);
+
         [Fact]
         public void Lit_fichier_transaction_et_retourne_transactions()
         {
@@ -45,6 +46,17 @@ namespace Infrastructure.Tests
             referentiels.Should().HaveCount(nbReferentielsAttendus);
             referentiels.First().Magasin.Should().Be(new Guid(guidMagasin));
             referentiels.First().Date.ToString("yyyyMMdd").Should().Be(date);
+        }
+
+        [Fact]
+        public void Lit_referentiels_produit_du_jour()
+        {
+            // Arrange
+            var lecteurFichier = new LecteurFichier();
+            // Act
+            var referentielsProduitDuJour = lecteurFichier.LitReferentielsProduitDuJour(_dossierRacine, dateDuJour);
+            // Assert
+            referentielsProduitDuJour.Should().HaveCount(12);
         }
     }
 }

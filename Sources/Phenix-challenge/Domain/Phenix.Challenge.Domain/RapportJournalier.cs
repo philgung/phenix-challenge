@@ -12,7 +12,7 @@ namespace Phenix.Challenge.Domain
         // Transaction du jour
         IEnumerable<Transaction> _transactionDuJour;
         //  Les référentiels par magasin
-        Dictionary<Guid, IEnumerable<ReferentielProduit>> _referentielsParMagasin;
+        IDictionary<Guid, IEnumerable<ReferentielProduit>> _referentielsParMagasin;
         private readonly DateTime dateDuJour;
         private readonly string dossierRacine;
         private readonly ILecteurFichier lecteurFichier;
@@ -27,12 +27,20 @@ namespace Phenix.Challenge.Domain
 
         private void Initialisation()
         {
-            var nomFichierTransactionDuJour = $"transactions_{dateDuJour.ToString("yyyyMMdd")}.data";
-            _transactionDuJour = lecteurFichier.LitTransactions(Path.Combine(dossierRacine, nomFichierTransactionDuJour));
-
+            InitialisationTransactions();
+            InitialisationReferentielMagasins();
         }
 
+        private void InitialisationReferentielMagasins()
+        {
+            _referentielsParMagasin = lecteurFichier.LitReferentielsProduitDuJour(dossierRacine, dateDuJour);
+        }
 
+        private void InitialisationTransactions()
+        {
+            var nomFichierTransactionDuJour = $"transactions_{dateDuJour.ToString("yyyyMMdd")}.data";
+            _transactionDuJour = lecteurFichier.LitTransactions(Path.Combine(dossierRacine, nomFichierTransactionDuJour));
+        }
 
         // Nous avons besoin de déterminer, chaque jour, 
         // les 100 produits qui ont les meilleures ventes par magasin 
@@ -54,7 +62,11 @@ namespace Phenix.Challenge.Domain
         }
         // et ceux qui génèrent le plus gros Chiffre d'Affaire en général 
 
-        
+        public IEnumerable<(int ProduitId, decimal ChiffreDAffaire)> Obtenir100PlusGrosChiffreDAffaireEnGeneral()
+        {
+
+            return null;
+        }
 
 
     }

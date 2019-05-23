@@ -1,4 +1,5 @@
 ﻿using Phenix.Challenge.Domain;
+using System;
 using System.Collections.Generic;
 
 namespace Phenix.Challenge.Services
@@ -7,5 +8,7 @@ namespace Phenix.Challenge.Services
     {
         IEnumerable<Transaction> LitTransactions(string cheminFichier);
         IEnumerable<ReferentielProduit> LitReferentielProduit(string cheminFichier);
+
+        IDictionary<Guid, IEnumerable<ReferentielProduit>> LitReferentielsProduitDuJour(string dossierRacine, DateTime dateDuJour);
     }
 }

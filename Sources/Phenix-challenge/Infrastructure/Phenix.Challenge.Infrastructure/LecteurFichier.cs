@@ -36,5 +36,17 @@ namespace Phenix.Challenge.Infrastructure
             var lignes = File.ReadAllLines(cheminFichier);
             return lignes.Select(ligne => impl(ligne));
         }
+
+        public IDictionary<Guid, IEnumerable<ReferentielProduit>> LitReferentielsProduitDuJour(string dossierRacine, DateTime dateDuJour)
+        {
+            var referentielsParMagasin = new Dictionary<Guid, IEnumerable<ReferentielProduit>>();
+            var cheminsfichiersReferentielsParMagasin = Directory.GetFiles(dossierRacine, $"reference_prod-*_{dateDuJour.ToString("yyyyMMdd")}.data");
+            foreach (var cheminFichierReferentiel in cheminsfichiersReferentielsParMagasin)
+            {
+                var referentielProduit = LitReferentielProduit(cheminFichierReferentiel);
+                referentielsParMagasin.Add(referentielProduit.First().Magasin, referentielProduit);
+            }
+            return referentielsParMagasin;
+        }
     }
 }
