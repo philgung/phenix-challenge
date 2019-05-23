@@ -1,6 +1,7 @@
 ﻿using Phenix.Challenge.Services;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -12,12 +13,23 @@ namespace Phenix.Challenge.Domain
         IEnumerable<Transaction> _transactionDuJour;
         //  Les référentiels par magasin
         Dictionary<Guid, IEnumerable<ReferentielProduit>> _referentielsParMagasin;
+        private readonly DateTime dateDuJour;
+        private readonly string dossierRacine;
         private readonly ILecteurFichier lecteurFichier;
 
-        public RapportJournalier(ILecteurFichier lecteurFichier)
+        public RapportJournalier(DateTime dateDuJour, string dossierRacine, ILecteurFichier lecteurFichier)
         {
+            this.dateDuJour = dateDuJour;
+            this.dossierRacine = dossierRacine;
             this.lecteurFichier = lecteurFichier;
-            
+            Initialisation();
+        }
+
+        private void Initialisation()
+        {
+            var nomFichierTransactionDuJour = $"transactions_{dateDuJour.ToString("yyyyMMdd")}.data";
+            _transactionDuJour = lecteurFichier.LitTransactions(Path.Combine(dossierRacine, nomFichierTransactionDuJour));
+
         }
 
 
@@ -34,7 +46,11 @@ namespace Phenix.Challenge.Domain
         // les 100 produits qui ont les meilleures ventes en général  
         public IEnumerable<int> Obtenir100MeilleursVentesEnGeneral()
         {
-            throw new NotImplementedException();
+            var orderedEnumerable = _transactionDuJour.GroupBy(t => t.ProduitId)
+                .Select(g => (g.Key, quantiteTotal:g.Sum(t => t.Quantite)))
+                .OrderByDescending(x => x.quantiteTotal);
+
+            return orderedEnumerable.Take(100).Select(x => x.Key);
         }
         // et ceux qui génèrent le plus gros Chiffre d'Affaire en général 
 

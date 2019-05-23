@@ -33,7 +33,7 @@ namespace Phenix.Challenge.Domain.Tests
             var lecteurFichierMock = new Mock<ILecteurFichier>();
             lecteurFichierMock.Setup(x => x.LitTransactions(It.IsAny<string>())).Returns(transactions);
 
-            var rapportJounalier = new RapportJournalier(lecteurFichierMock.Object);
+            var rapportJounalier = new RapportJournalier(new DateTime(2017,05,14), "../../../../../../../data", lecteurFichierMock.Object);
             // Act
             var meilleursVentes = rapportJounalier.Obtenir100MeilleursVentesEnGeneral();
             // Assert
