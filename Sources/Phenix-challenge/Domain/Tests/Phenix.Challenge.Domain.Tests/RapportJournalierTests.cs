@@ -13,7 +13,6 @@ namespace Phenix.Challenge.Domain.Tests
     public class RapportJournalierTests
     {
         readonly RapportJournalier rapportJounalier;
-        const string _dossierRacine = "../../../../../../../../data/";
         DateTime dateDuJour = new DateTime(2017, 05, 14);
         public RapportJournalierTests()
         {
@@ -34,15 +33,19 @@ namespace Phenix.Challenge.Domain.Tests
             var lecteurFichierMock = new Mock<ILecteurFichier>();
             lecteurFichierMock.Setup(x => x.LitTransactions(It.IsAny<string>())).Returns(transactions);
 
-            lecteurFichierMock.Setup(x => x.LitReferentielProduit(Path.Combine(_dossierRacine, 
-                            $"reference_prod-{magasin1.ToString()}_{dateDuJour.ToString("yyyyMMdd")}.data")))
-                .Returns(new List<ReferentielProduit> {
-                    new ReferentielProduit { ProduitId = 531, Prix = 5.59M, Magasin = magasin1, Date = dateDuJour}
+            MockLitReferentielProduitDuJour(lecteurFichierMock,
+                new[] {
+                    (magasin1, new[] { 5.59M, 1.50M, 0.95M, 11.50M, 37.60M }),
+                    (magasin2, new[] { 5.57M, 2.00M, 1.10M, 10.80M, 39.00M }),
+                    (magasin3, new[] { 5.54M, 1.50M, 1.00M, 12.00M, 37.90M }),
+                    (magasin4, new[] { 5.55M, 2.10M, 1.10M, 11.50M, 37.60M })
                 });
-
-
+            
             rapportJounalier = new RapportJournalier(dateDuJour, string.Empty, lecteurFichierMock.Object);
         }
+
+        
+
 
         [Fact]
         public void Obtenir100MeilleursVentesEnGeneral()
@@ -72,16 +75,40 @@ namespace Phenix.Challenge.Domain.Tests
             var plusGrosChiffreDAffaire = rapportJounalier.Obtenir100PlusGrosChiffreDAffaireEnGeneral();
             // Assert
             plusGrosChiffreDAffaire.Should().HaveCount(5);
-            plusGrosChiffreDAffaire.ElementAt(0).ProduitId.Should().Be(531);
-            plusGrosChiffreDAffaire.ElementAt(0).ChiffreDAffaire.Should().Be(9);
-            plusGrosChiffreDAffaire.ElementAt(1).ProduitId.Should().Be(39);
-            plusGrosChiffreDAffaire.ElementAt(1).ChiffreDAffaire.Should().Be(8);
-            plusGrosChiffreDAffaire.ElementAt(2).ProduitId.Should().Be(10);
-            plusGrosChiffreDAffaire.ElementAt(2).ChiffreDAffaire.Should().Be(6);
-            plusGrosChiffreDAffaire.ElementAt(3).ProduitId.Should().Be(55);
-            plusGrosChiffreDAffaire.ElementAt(3).ChiffreDAffaire.Should().Be(3);
-            plusGrosChiffreDAffaire.ElementAt(4).ProduitId.Should().Be(773);
-            plusGrosChiffreDAffaire.ElementAt(4).ChiffreDAffaire.Should().Be(2);
+            plusGrosChiffreDAffaire.ElementAt(0).ProduitId.Should().Be(773);
+            plusGrosChiffreDAffaire.ElementAt(0).ChiffreDAffaire.Should().Be(75.20M);
+            plusGrosChiffreDAffaire.ElementAt(1).ProduitId.Should().Be(10);
+            plusGrosChiffreDAffaire.ElementAt(1).ChiffreDAffaire.Should().Be(69M);
+            plusGrosChiffreDAffaire.ElementAt(2).ProduitId.Should().Be(531);
+            plusGrosChiffreDAffaire.ElementAt(2).ChiffreDAffaire.Should().Be(50.15M);
+            plusGrosChiffreDAffaire.ElementAt(3).ProduitId.Should().Be(39);
+            plusGrosChiffreDAffaire.ElementAt(3).ChiffreDAffaire.Should().Be(8M);
+            plusGrosChiffreDAffaire.ElementAt(4).ProduitId.Should().Be(55);
+            plusGrosChiffreDAffaire.ElementAt(4).ChiffreDAffaire.Should().Be(6M);
+        }
+
+        private void MockLitReferentielProduitDuJour(Mock<ILecteurFichier> lecteurFichierMock,
+            (Guid magasin, decimal[] prix)[] referentielMagasin)
+        {
+            var referentielsDuJour = new Dictionary<Guid, IEnumerable<ReferentielProduit>>();
+            foreach (var referentiel in referentielMagasin)
+            {
+                referentielsDuJour.Add(referentiel.magasin, new List<ReferentielProduit> {
+                    CreerReferentielProduit(531, referentiel.prix[0], referentiel.magasin),
+                    CreerReferentielProduit(55, referentiel.prix[1], referentiel.magasin),
+                    CreerReferentielProduit(39, referentiel.prix[2], referentiel.magasin),
+                    CreerReferentielProduit(10, referentiel.prix[3], referentiel.magasin),
+                    CreerReferentielProduit(773, referentiel.prix[4], referentiel.magasin),
+                });
+            }
+
+            lecteurFichierMock.Setup(x => x.LitReferentielsProduitDuJour(It.IsAny<string>(), dateDuJour))
+                            .Returns(referentielsDuJour);
+        }
+
+        private ReferentielProduit CreerReferentielProduit(int produitId, decimal prix, Guid magasin)
+        {
+            return new ReferentielProduit { ProduitId = produitId, Prix = prix, Magasin = magasin, Date = dateDuJour };
         }
     }
 }
