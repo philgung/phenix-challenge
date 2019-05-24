@@ -46,7 +46,13 @@ namespace Phenix.Challenge.Domain
         // les 100 produits qui ont les meilleures ventes par magasin 
         public IEnumerable<(int ProduitId, int QuantiteTotal)> Obtenir100MeilleursVentesParMagasin(Guid magasin)
         {
-            throw new NotImplementedException();
+            var meilleursVente = _transactionDuJour
+                .Where(t => t.Magasin == magasin)
+                .GroupBy(t => t.ProduitId)
+               .Select(g => (ProduitId: g.Key, QuantiteTotal: g.Sum(t => t.Quantite)))
+               .OrderByDescending(x => x.QuantiteTotal);
+
+            return meilleursVente.Take(100);
         }
 
         // et ceux qui génèrent le plus gros Chiffre d'Affaire par magasin 
@@ -71,6 +77,16 @@ namespace Phenix.Challenge.Domain
         private decimal ObtenirPrixUnitaire(int produitId, Guid magasin)
         {
             return _referentielsParMagasin[magasin].Single(r => r.ProduitId == produitId).Prix;
+        }
+
+        public IEnumerable<(int ProduitId, decimal ChiffreDAffaire)> Obtenir100PlusGrosChiffreDAffaireParMagasin(Guid magasin)
+        {
+            var plusGrosCA = _transactionDuJour
+                .Where(t => t.Magasin == magasin)
+                .GroupBy(t => t.ProduitId)
+                .Select(g => (ProduitId: g.Key, ChiffreAffaire: g.Sum(t => t.Quantite * ObtenirPrixUnitaire(t.ProduitId, t.Magasin))))
+                .OrderByDescending(x => x.ChiffreAffaire);
+            return plusGrosCA.Take(100);
         }
     }
 }

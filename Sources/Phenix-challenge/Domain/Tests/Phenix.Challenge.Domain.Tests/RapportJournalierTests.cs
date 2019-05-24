@@ -99,6 +99,22 @@ namespace Phenix.Challenge.Domain.Tests
             meilleursVentesParMagasin.ElementAt(1).QuantiteTotal.Should().Be(2);
         }
 
+
+        [Fact]
+        public void Obtenir100PlusGrosChiffreDAffaireParMagasin()
+        {
+            // Arrange
+
+            // Act
+            var plusGrosChiffreDAffaire = rapportJounalier.Obtenir100PlusGrosChiffreDAffaireParMagasin(magasin1);
+            // Assert
+            plusGrosChiffreDAffaire.Should().HaveCount(2);
+            plusGrosChiffreDAffaire.ElementAt(0).ProduitId.Should().Be(773);
+            plusGrosChiffreDAffaire.ElementAt(0).ChiffreDAffaire.Should().Be(75.20M);
+            plusGrosChiffreDAffaire.ElementAt(1).ProduitId.Should().Be(531);
+            plusGrosChiffreDAffaire.ElementAt(1).ChiffreDAffaire.Should().Be(27.95M);
+        }
+
         private void MockLitReferentielProduitDuJour(Mock<ILecteurFichier> lecteurFichierMock,
             (Guid magasin, decimal[] prix)[] referentielMagasin)
         {
