@@ -10,12 +10,12 @@ using Xunit;
 
 namespace Phenix.Challenge.Domain.Tests
 {
-    public class RapportJournalierTests
+    public class RapportTests
     {
-        readonly RapportJournalier rapportJounalier;
+        readonly Rapport rapportJounalier;
         DateTime dateDuJour = new DateTime(2017, 05, 14);
         Guid magasin1;
-        public RapportJournalierTests()
+        public RapportTests()
         {
             magasin1 = new Guid("2a4b6b81-5aa2-4ad8-8ba9-ae1a006e7d71");
             var magasin2 = new Guid("bdc2a431-797d-4b07-9567-67c565a67b84");
@@ -42,7 +42,7 @@ namespace Phenix.Challenge.Domain.Tests
                     (magasin4, new[] { 5.55M, 2.10M, 1.10M, 11.50M, 37.60M })
                 });
             
-            rapportJounalier = new RapportJournalier(dateDuJour, string.Empty, lecteurFichierMock.Object);
+            rapportJounalier = new Rapport(dateDuJour, string.Empty, lecteurFichierMock.Object);
         }
 
         [Fact]

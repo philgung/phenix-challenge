@@ -7,17 +7,15 @@ using System.Text;
 
 namespace Phenix.Challenge.Domain
 {
-    public class RapportJournalier
+    public class Rapport
     {
-        // Transaction du jour
         IEnumerable<Transaction> _transactionDuJour;
-        //  Les référentiels par magasin
         IDictionary<Guid, IEnumerable<ReferentielProduit>> _referentielsParMagasin;
         private readonly DateTime dateDuJour;
         private readonly string dossierRacine;
         private readonly ILecteurFichier lecteurFichier;
 
-        public RapportJournalier(DateTime dateDuJour, string dossierRacine, ILecteurFichier lecteurFichier)
+        public Rapport(DateTime dateDuJour, string dossierRacine, ILecteurFichier lecteurFichier)
         {
             this.dateDuJour = dateDuJour;
             this.dossierRacine = dossierRacine;
@@ -42,8 +40,6 @@ namespace Phenix.Challenge.Domain
             _transactionDuJour = lecteurFichier.LitTransactions(Path.Combine(dossierRacine, nomFichierTransactionDuJour));
         }
 
-        // Nous avons besoin de déterminer, chaque jour, 
-        // les 100 produits qui ont les meilleures ventes par magasin 
         public IEnumerable<(int ProduitId, int QuantiteTotal)> Obtenir100MeilleursVentesParMagasin(Guid magasin)
         {
             var meilleursVente = _transactionDuJour
@@ -54,8 +50,6 @@ namespace Phenix.Challenge.Domain
 
             return meilleursVente.Take(100);
         }
-
-        // et ceux qui génèrent le plus gros Chiffre d'Affaire par magasin 
 
         public IEnumerable<(int ProduitId, int QuantiteTotal)> Obtenir100MeilleursVentesEnGeneral()
         {

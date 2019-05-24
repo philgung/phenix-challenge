@@ -34,7 +34,7 @@ namespace Phenix.ChallengeConsole
 
         private static void LanceGenerationRapport(string cheminRacine, DateTime dateDuJour)
         {
-            var rapport_journalier = new RapportJournalier(dateDuJour, cheminRacine, new LecteurFichier());
+            var rapport_journalier = new Rapport(dateDuJour, cheminRacine, new LecteurFichier());
             measures(() =>
             {
                 var meilleursVentes = rapport_journalier.Obtenir100MeilleursVentesEnGeneral(); // 8 ms
