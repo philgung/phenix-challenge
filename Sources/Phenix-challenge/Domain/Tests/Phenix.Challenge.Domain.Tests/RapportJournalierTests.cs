@@ -14,9 +14,10 @@ namespace Phenix.Challenge.Domain.Tests
     {
         readonly RapportJournalier rapportJounalier;
         DateTime dateDuJour = new DateTime(2017, 05, 14);
+        Guid magasin1;
         public RapportJournalierTests()
         {
-            var magasin1 = new Guid("2a4b6b81-5aa2-4ad8-8ba9-ae1a006e7d71");
+            magasin1 = new Guid("2a4b6b81-5aa2-4ad8-8ba9-ae1a006e7d71");
             var magasin2 = new Guid("bdc2a431-797d-4b07-9567-67c565a67b84");
             var magasin3 = new Guid("72a2876c-bc8b-4f35-8882-8d661fac2606");
             var magasin4 = new Guid("29366c83-eae9-42d3-a8af-f15339830dc5");
@@ -43,9 +44,6 @@ namespace Phenix.Challenge.Domain.Tests
             
             rapportJounalier = new RapportJournalier(dateDuJour, string.Empty, lecteurFichierMock.Object);
         }
-
-        
-
 
         [Fact]
         public void Obtenir100MeilleursVentesEnGeneral()
@@ -85,6 +83,20 @@ namespace Phenix.Challenge.Domain.Tests
             plusGrosChiffreDAffaire.ElementAt(3).ChiffreDAffaire.Should().Be(8M);
             plusGrosChiffreDAffaire.ElementAt(4).ProduitId.Should().Be(55);
             plusGrosChiffreDAffaire.ElementAt(4).ChiffreDAffaire.Should().Be(6M);
+        }
+
+        [Fact]
+        public void Obtenir100MeilleursVenteParMagasin()
+        {
+            // Arrange
+            // Act
+            var meilleursVentesParMagasin = rapportJounalier.Obtenir100MeilleursVentesParMagasin(magasin1);
+            // Assert
+            meilleursVentesParMagasin.Should().HaveCount(2);
+            meilleursVentesParMagasin.ElementAt(0).ProduitId.Should().Be(531);
+            meilleursVentesParMagasin.ElementAt(0).QuantiteTotal.Should().Be(5);
+            meilleursVentesParMagasin.ElementAt(1).ProduitId.Should().Be(773);
+            meilleursVentesParMagasin.ElementAt(1).QuantiteTotal.Should().Be(2);
         }
 
         private void MockLitReferentielProduitDuJour(Mock<ILecteurFichier> lecteurFichierMock,

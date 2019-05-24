@@ -44,14 +44,13 @@ namespace Phenix.Challenge.Domain
 
         // Nous avons besoin de déterminer, chaque jour, 
         // les 100 produits qui ont les meilleures ventes par magasin 
-        public IEnumerable<int> Obtenir100MeilleursVentesParMagasin(Guid magasin)
+        public IEnumerable<(int ProduitId, int QuantiteTotal)> Obtenir100MeilleursVentesParMagasin(Guid magasin)
         {
             throw new NotImplementedException();
         }
 
         // et ceux qui génèrent le plus gros Chiffre d'Affaire par magasin 
 
-        // les 100 produits qui ont les meilleures ventes en général  
         public IEnumerable<(int ProduitId, int QuantiteTotal)> Obtenir100MeilleursVentesEnGeneral()
         {
             var meilleursVente = _transactionDuJour.GroupBy(t => t.ProduitId)
@@ -60,7 +59,6 @@ namespace Phenix.Challenge.Domain
 
             return meilleursVente.Take(100);
         }
-        // et ceux qui génèrent le plus gros Chiffre d'Affaire en général 
 
         public IEnumerable<(int ProduitId, decimal ChiffreDAffaire)> Obtenir100PlusGrosChiffreDAffaireEnGeneral()
         {
