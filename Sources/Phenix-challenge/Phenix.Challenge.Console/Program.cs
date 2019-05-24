@@ -19,29 +19,33 @@ namespace Phenix.ChallengeConsole
         };
         static void Main(string[] args)
         {
-            // création rapport
-            var rapport_14052017 = new RapportJournalier(new DateTime(2017, 05, 14), "../../../../../../data", new LecteurFichier());
-            // remplissage rapport du dossier data
-
-            // Génération rapports
-            measures(() => {
-                var meilleursVentes = rapport_14052017.Obtenir100MeilleursVentesEnGeneral();
-                Console.WriteLine("MeilleursVentes :");
-            });
-
-            measures(() =>
-            {
-                var plusGrosCA = rapport_14052017.Obtenir100PlusGrosChiffreDAffaireEnGeneral();
-                Console.WriteLine("Plus gros chiffre d'affaires :");
-            });
-
-
+            var cheminRacine = @"C:\Users\Philippe Desktop\Downloads\PhenixGenerator.1.0.0\PhenixGenerator.0.1\out\20190101";
+            var dateDuJour = new DateTime(2019, 01, 01);
+            //var cheminRacine = @"../../../../../../data";
+            //var dateDuJour = new DateTime(2017, 05, 14);
+            LanceGenerationRapport(cheminRacine, dateDuJour);
 
             // Export rapports en fichier.
 
             Console.ReadKey();
 
 
+        }
+
+        private static void LanceGenerationRapport(string cheminRacine, DateTime dateDuJour)
+        {
+            var rapport_14052017 = new RapportJournalier(dateDuJour, cheminRacine, new LecteurFichier());
+            measures(() =>
+            {
+                var meilleursVentes = rapport_14052017.Obtenir100MeilleursVentesEnGeneral(); // 8 ms
+                Console.WriteLine("MeilleursVentes :");
+            });
+
+            measures(() =>
+            {
+                var plusGrosCA = rapport_14052017.Obtenir100PlusGrosChiffreDAffaireEnGeneral(); // 4 ms
+                Console.WriteLine("Plus gros chiffre d'affaires :");
+            });
         }
     }
 }
