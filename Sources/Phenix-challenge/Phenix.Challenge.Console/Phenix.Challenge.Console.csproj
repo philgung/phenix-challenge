@@ -5,4 +5,9 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Phenix.Challenge.Domain\Phenix.Challenge.Domain.csproj" />
+    <ProjectReference Include="..\Infrastructure\Phenix.Challenge.Infrastructure\Phenix.Challenge.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
