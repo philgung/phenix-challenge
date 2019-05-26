@@ -33,15 +33,12 @@ namespace Phenix.Challenge.Domain
 
         private void InitialisationReferentielMagasins()
         {
-            // TODO dateDeDebut, DateDeFin
             _referentielsParMagasin = lecteurFichier.LitReferentielsProduitDUnePeriode(dossierRacine, dateDeDebut, dateDeDebut);
         }
 
         private void InitialisationTransactions()
         {
-            // TODO dateDeDebut, DateDeFin
-            var nomFichierTransactionDuJour = $"transactions_{dateDeDebut.ToString("yyyyMMdd")}.data";
-            _transactions = lecteurFichier.LitTransactions(Path.Combine(dossierRacine, nomFichierTransactionDuJour));
+            _transactions = lecteurFichier.LitTransactionsDUnePeriode(dossierRacine, dateDeDebut, dateDeDebut);
         }
 
         public IEnumerable<(int ProduitId, int QuantiteTotal)> Obtenir100MeilleursVentesParMagasin(Guid magasin)

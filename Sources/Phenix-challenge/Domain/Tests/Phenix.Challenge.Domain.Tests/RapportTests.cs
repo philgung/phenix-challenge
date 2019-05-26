@@ -32,7 +32,7 @@ namespace Phenix.Challenge.Domain.Tests
             };
 
             var lecteurFichierMock = new Mock<ILecteurFichier>();
-            lecteurFichierMock.Setup(x => x.LitTransactions(It.IsAny<string>())).Returns(transactions);
+            lecteurFichierMock.Setup(x => x.LitTransactionsDUnePeriode(It.IsAny<string>(), dateDuJour, dateDuJour)).Returns(transactions);
 
             MockLitReferentielProduitDuJour(lecteurFichierMock,
                 new[] {

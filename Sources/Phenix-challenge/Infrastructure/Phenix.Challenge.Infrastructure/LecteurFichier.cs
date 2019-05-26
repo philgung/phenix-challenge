@@ -40,7 +40,13 @@ namespace Phenix.Challenge.Infrastructure
         public IDictionary<Guid, IEnumerable<ReferentielProduit>> LitReferentielsProduitDUnePeriode(string dossierRacine, DateTime dateDeDebut, DateTime dateDeFin)
         {
             var referentielsParMagasin = new Dictionary<Guid, IEnumerable<ReferentielProduit>>();
-            var cheminsfichiersReferentielsParMagasin = Directory.GetFiles(dossierRacine, $"reference_prod-*_{dateDeDebut.ToString("yyyyMMdd")}.data");
+
+            var cheminsfichiersReferentielsParMagasin = new List<string>();
+            for (var dateDuJour = dateDeDebut; dateDuJour <= dateDeFin; dateDuJour = dateDuJour.AddDays(1))
+            {
+                cheminsfichiersReferentielsParMagasin.AddRange(Directory.GetFiles(dossierRacine, $"reference_prod-*_{dateDuJour.ToString("yyyyMMdd")}.data"));
+            }
+
             foreach (var cheminFichierReferentiel in cheminsfichiersReferentielsParMagasin)
             {
                 var referentielProduit = LitReferentielProduit(cheminFichierReferentiel);
@@ -51,7 +57,16 @@ namespace Phenix.Challenge.Infrastructure
 
         public IEnumerable<Transaction> LitTransactionsDUnePeriode(string dossierRacine, DateTime dateDeDebut, DateTime dateDeFin)
         {
-            throw new NotImplementedException();
+            var transactions = new List<Transaction>();
+
+            for (var dateDuJour = dateDeDebut; dateDuJour <= dateDeFin; dateDuJour = dateDuJour.AddDays(1))
+            {
+                var nomFichierTransactionDuJour = $"transactions_{dateDuJour.ToString("yyyyMMdd")}.data";
+                var transactionsLu = LitTransactions(Path.Combine(dossierRacine, nomFichierTransactionDuJour));
+                transactions.AddRange(transactionsLu);
+            }           
+
+            return transactions;
         }
     }
 }
