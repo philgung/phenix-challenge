@@ -30,23 +30,28 @@ namespace Phenix.Challenge.Infrastructure
             });
         }
 
-        public IEnumerable<T> Lit<T>(string cheminFichier, Func<string, T> impl)
+        private IEnumerable<T> Lit<T>(string cheminFichier, Func<string, T> impl)
         {
             // TODO : check fileName    
             var lignes = File.ReadAllLines(cheminFichier);
             return lignes.Select(ligne => impl(ligne));
         }
 
-        public IDictionary<Guid, IEnumerable<ReferentielProduit>> LitReferentielsProduitDuJour(string dossierRacine, DateTime dateDuJour)
+        public IDictionary<Guid, IEnumerable<ReferentielProduit>> LitReferentielsProduitDUnePeriode(string dossierRacine, DateTime dateDeDebut, DateTime dateDeFin)
         {
             var referentielsParMagasin = new Dictionary<Guid, IEnumerable<ReferentielProduit>>();
-            var cheminsfichiersReferentielsParMagasin = Directory.GetFiles(dossierRacine, $"reference_prod-*_{dateDuJour.ToString("yyyyMMdd")}.data");
+            var cheminsfichiersReferentielsParMagasin = Directory.GetFiles(dossierRacine, $"reference_prod-*_{dateDeDebut.ToString("yyyyMMdd")}.data");
             foreach (var cheminFichierReferentiel in cheminsfichiersReferentielsParMagasin)
             {
                 var referentielProduit = LitReferentielProduit(cheminFichierReferentiel);
                 referentielsParMagasin.Add(referentielProduit.First().Magasin, referentielProduit);
             }
             return referentielsParMagasin;
+        }
+
+        public IEnumerable<Transaction> LitTransactionsDUnePeriode(string dossierRacine, DateTime dateDeDebut, DateTime dateDeFin)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -54,7 +54,7 @@ namespace Infrastructure.Tests
             // Arrange
             var lecteurFichier = new LecteurFichier();
             // Act
-            var referentielsProduitDuJour = lecteurFichier.LitReferentielsProduitDuJour(_dossierRacine, dateDuJour);
+            var referentielsProduitDuJour = lecteurFichier.LitReferentielsProduitDUnePeriode(_dossierRacine, dateDuJour, dateDuJour);
             // Assert
             referentielsProduitDuJour.Should().HaveCount(12);
         }

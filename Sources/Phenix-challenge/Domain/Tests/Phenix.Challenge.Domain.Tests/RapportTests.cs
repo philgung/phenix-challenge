@@ -42,7 +42,7 @@ namespace Phenix.Challenge.Domain.Tests
                     (magasin4, new[] { 5.55M, 2.10M, 1.10M, 11.50M, 37.60M })
                 });
             
-            rapportJounalier = new Rapport(dateDuJour, string.Empty, lecteurFichierMock.Object);
+            rapportJounalier = new Rapport(dateDuJour, dateDuJour, string.Empty, lecteurFichierMock.Object);
         }
 
         [Fact]
@@ -130,7 +130,7 @@ namespace Phenix.Challenge.Domain.Tests
                 });
             }
 
-            lecteurFichierMock.Setup(x => x.LitReferentielsProduitDuJour(It.IsAny<string>(), dateDuJour))
+            lecteurFichierMock.Setup(x => x.LitReferentielsProduitDUnePeriode(It.IsAny<string>(), dateDuJour, dateDuJour))
                             .Returns(referentielsDuJour);
         }
 

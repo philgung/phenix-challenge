@@ -9,6 +9,8 @@ namespace Phenix.Challenge.Services
         IEnumerable<Transaction> LitTransactions(string cheminFichier);
         IEnumerable<ReferentielProduit> LitReferentielProduit(string cheminFichier);
 
-        IDictionary<Guid, IEnumerable<ReferentielProduit>> LitReferentielsProduitDuJour(string dossierRacine, DateTime dateDuJour);
+        IDictionary<Guid, IEnumerable<ReferentielProduit>> LitReferentielsProduitDUnePeriode(string dossierRacine, DateTime dateDeDebut, DateTime dateDeFin);
+
+        IEnumerable<Transaction> LitTransactionsDUnePeriode(string dossierRacine, DateTime dateDeDebut, DateTime dateDeFin);
     }
 }
