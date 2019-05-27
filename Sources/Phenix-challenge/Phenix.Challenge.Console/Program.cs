@@ -1,4 +1,5 @@
 ﻿
+using Phenix.Challenge.Application;
 using Phenix.Challenge.Domain;
 using Phenix.Challenge.Infrastructure;
 using System;
@@ -20,8 +21,8 @@ namespace Phenix.ChallengeConsole
         };
         static void Main(string[] args)
         {
-            LanceGenerationRapport(@"C:\Users\Philippe Desktop\Downloads\PhenixGenerator.1.0.0\PhenixGenerator.0.1\out\20190101", 
-                new DateTime(2019, 01, 01));
+            LanceGenerationRapport(@"C:\Users\phil_\source\repos\philgung\PhenixGenerator.1.0.0\PhenixGenerator.0.1\out\reference", 
+                new DateTime(2019, 01, 14));
 
             // LanceGenerationRapport(@"../../../../../../data", new DateTime(2017, 05, 14));
 
@@ -34,17 +35,29 @@ namespace Phenix.ChallengeConsole
 
         private static void LanceGenerationRapport(string cheminRacine, DateTime dateDuJour)
         {
-            var rapport_journalier = new Rapport(dateDuJour, dateDuJour, cheminRacine, new LecteurFichier());
+            var rapportService = new RapportService(cheminRacine, new LecteurFichier());
+            //var rapport_journalier = new Rapport(dateDuJour, dateDuJour, cheminRacine, new LecteurFichier());
             measures(() =>
             {
-                var meilleursVentes = rapport_journalier.Obtenir100MeilleursVentesEnGeneral(); // 8 ms
+                var meilleursVentes = rapportService.Obtenir100MeilleursVentesJournaliereEnGeneral(dateDuJour); // 8 ms
                 
-            }, "MeilleursVentes :");
+            }, "MeilleursVentes journalieres :");
 
             measures(() =>
             {
-                var plusGrosCA = rapport_journalier.Obtenir100PlusGrosChiffreDAffaireEnGeneral(); // 4 ms
-            }, "Plus gros chiffre d'affaires :");
+                var plusGrosCA = rapportService.Obtenir100PlusGrosChiffreDAffaireJournaliereEnGeneral(dateDuJour); // 4 ms
+            }, "Plus gros chiffre d'affaires journalieres :");
+
+            measures(() =>
+            {
+                var meilleursVentes = rapportService.Obtenir100MeilleursVentesHebdomadaireEnGeneral(dateDuJour); // 8 ms
+
+            }, "MeilleursVentes hebdo :");
+
+            measures(() =>
+            {
+                var plusGrosCA = rapportService.Obtenir100PlusGrosChiffreDAffaireHebdomadaireEnGeneral(dateDuJour); // 4 ms
+            }, "Plus gros chiffre d'affaires hebdo :");
         }
     }
 }

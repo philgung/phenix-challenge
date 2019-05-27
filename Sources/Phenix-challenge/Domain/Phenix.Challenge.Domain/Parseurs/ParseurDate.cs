@@ -9,7 +9,9 @@ namespace Phenix.Challenge.Domain.Parseurs
         {
             try
             {
-                return DateTime.ParseExact(dateFormatIso8601, new[] { "yyyyMMddTHHmmss+0100", "yyyyMMddTHHmmss+0200" }, null, System.Globalization.DateTimeStyles.RoundtripKind);
+                //14/01/2019 00:00:00
+                return DateTime.ParseExact(dateFormatIso8601, new[] { "yyyyMMddTHHmmss+0100", "yyyyMMddTHHmmss+0200",
+                "dd/MM/yyyy HH:mm:ss"}, null, System.Globalization.DateTimeStyles.RoundtripKind);
             }
             catch (FormatException ex)
             {

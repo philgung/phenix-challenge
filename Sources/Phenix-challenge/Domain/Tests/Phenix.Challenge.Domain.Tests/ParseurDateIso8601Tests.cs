@@ -12,6 +12,7 @@ namespace Phenix.Challenge.Domain.Tests
         [InlineData("20170514T223544+0100", 2017, 05, 14, 22, 35, 44)]
         [InlineData("20170414T003551+0100", 2017, 04, 14, 0, 35, 51)]
         [InlineData("20170514T030056+0200", 2017, 05, 14, 3, 0, 56)]
+        [InlineData("14/01/2019 03:00:56", 2019, 01, 14, 3, 0, 56)]
         public void ParseDateIso8601(string dateFormatIso8601, int annee, int mois, int jour, 
             int heures, int minutes, int secondes)
         {
