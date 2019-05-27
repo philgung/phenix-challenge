@@ -3,6 +3,7 @@ using Phenix.Challenge.Application;
 using Phenix.Challenge.Infrastructure;
 using System;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Phenix.ChallengeConsole
 {
@@ -19,10 +20,10 @@ namespace Phenix.ChallengeConsole
         };
         static void Main(string[] args)
         {
-            //LanceGenerationRapport(@"C:\Users\phil_\source\repos\philgung\PhenixGenerator.1.0.0\PhenixGenerator.0.1\out\reference", 
-            //    new DateTime(2019, 01, 14));
+            LanceGenerationRapport(@"C:\Users\phil_\source\repos\philgung\PhenixGenerator.1.0.0\PhenixGenerator.0.1\out\reference",
+                new DateTime(2019, 01, 1));
             LanceGenerationRapportConcurrent(@"C:\Users\phil_\source\repos\philgung\PhenixGenerator.1.0.0\PhenixGenerator.0.1\out\reference",
-                new DateTime(2019, 01, 14));
+                new DateTime(2019, 01, 8));
             // Export rapports en fichier.
 
             Console.ReadKey();
@@ -57,19 +58,10 @@ namespace Phenix.ChallengeConsole
 
         private static void LanceGenerationRapport(string cheminRacine, DateTime dateDuJour)
         {
-            //Vente jour
-            //10 676 ms
-            //CA jour
-            //12 473 ms
-
-            //Vente Hebdo
-            //15 911 ms
-            //CA Hebdo
-            //16 530 ms
             var rapportService = new RapportService(cheminRacine, new LecteurFichier());
             measures(() =>
             {
-                var meilleursVentes = rapportService.Obtenir100MeilleursVentesJournaliereEnGeneral(dateDuJour);                
+                var meilleursVentes = rapportService.Obtenir100MeilleursVentesJournaliereEnGeneral(dateDuJour);
             }, "Meilleurs Ventes journalieres :");
 
 
@@ -86,8 +78,27 @@ namespace Phenix.ChallengeConsole
             measures(() =>
             {
                 var plusGrosCA = rapportService.Obtenir100PlusGrosChiffreDAffaireHebdomadaireEnGeneral(dateDuJour);
-            }, "Plus gros chiffre d'affaires hebdo :");           
+            }, "Plus gros chiffre d'affaires hebdo :");
 
         }
+
+        private static void GenererFichier()
+        {
+            //Les résultats sont les fichiers:
+
+            //top_100_ventes_<ID_MAGASIN> _YYYYMMDD.data
+            //top_100_ventes_GLOBAL_YYYYMMDD.data
+            //top_100_ca_<ID_MAGASIN> _YYYYMMDD.data
+            //top_100_ca_GLOBAL_YYYYMMDD.data
+            //top_100_ventes_<ID_MAGASIN> _YYYYMMDD-J7.data
+            //top_100_ventes_GLOBAL_YYYYMMDD - J7.data
+            //top_100_ca_<ID_MAGASIN> _YYYYMMDD-J7.data
+            //top_100_ca_GLOBAL_YYYYMMDD - J7.data
+
+
+        }
+
+
+
     }
 }

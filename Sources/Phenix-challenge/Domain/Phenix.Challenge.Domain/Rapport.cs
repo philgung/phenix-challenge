@@ -79,8 +79,6 @@ namespace Phenix.Challenge.Domain
             return plusGrosCA.Take(100);
         }
 
-
-
         public IEnumerable<(int ProduitId, int QuantiteTotal)> Obtenir100MeilleursVentesEnGeneralConcurrent()
         {
             return Filtrer100MeilleursVentesConcurrent(_transactions);
@@ -103,7 +101,9 @@ namespace Phenix.Challenge.Domain
 
         private IEnumerable<(int ProduitId, int QuantiteTotal)> Filtrer100MeilleursVentesConcurrent(IEnumerable<Transaction> transactions)
         {
-            var meilleursVente = transactions.GroupBy(t => t.ProduitId).AsParallel().WithDegreeOfParallelism(4)
+            var meilleursVente = transactions
+                .AsParallel().WithDegreeOfParallelism(4)
+                .GroupBy(t => t.ProduitId)
                 .Select(g => (ProduitId: g.Key, QuantiteTotal: g.Sum(t => t.Quantite)))
                 .OrderByDescending(x => x.QuantiteTotal);
 
@@ -112,8 +112,9 @@ namespace Phenix.Challenge.Domain
 
         private IEnumerable<(int ProduitId, decimal ChiffreDAffaire)> Filtrer100PlusGrosChiffreDAffaireConcurrent(IEnumerable<Transaction> transactions)
         {
-            var plusGrosCA = transactions.GroupBy(t => t.ProduitId)
+            var plusGrosCA = transactions
                 .AsParallel().WithDegreeOfParallelism(4)
+                .GroupBy(t => t.ProduitId)
                 .Select(g => (ProduitId: g.Key, ChiffreAffaire: g.Sum(t => t.Quantite * ObtenirPrixUnitaire(t.ProduitId, t.Magasin))))
                 .OrderByDescending(x => x.ChiffreAffaire);
             return plusGrosCA.Take(100);

@@ -9,8 +9,10 @@ namespace Phenix.Challenge.Domain.Tests
     public class ParseurReferentielProduitTests
     {
         [Theory]
-        [InlineData("1|4.7")]             
-        public void ParseReferentielProduit(string ligne)
+        [InlineData("1|4.7", 4.7)]
+        [InlineData("1|.7", 0.7)]
+        [InlineData("1|,7", 0.7)]
+        public void ParseReferentielProduit(string ligne, decimal prixAttendu)
         {
             // Arrange
             var date = new DateTime(2017, 05, 14);
@@ -20,7 +22,7 @@ namespace Phenix.Challenge.Domain.Tests
             var referentielProduit = ParseurReferentielProduit.Parse(ligne, guidMagasin, date);
             // Assert
             referentielProduit.ProduitId.Should().Be(1);
-            referentielProduit.Prix.Should().Be(4.7M);
+            referentielProduit.Prix.Should().Be(prixAttendu);
             referentielProduit.Date.Should().Be(date);
             referentielProduit.Magasin.Should().Be(guidMagasin);
         }
