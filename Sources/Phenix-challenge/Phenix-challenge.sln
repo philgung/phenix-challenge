@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28902.138
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Phenix.Challenge.Console", "Phenix.Challenge.Console\Phenix.Challenge.Console.csproj", "{31F7157C-7748-4F98-873C-EE85A1AC1635}"
 EndProject
@@ -37,11 +37,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Phenix.Challenge.Domain.Tes
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{3694693B-5407-4E43-9162-3BA4CAC50E1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phenix.Challenge.Infrastructure", "Infrastructure\Phenix.Challenge.Infrastructure\Phenix.Challenge.Infrastructure.csproj", "{233DC5DA-DA54-4CB7-A937-D543BCC741AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Phenix.Challenge.Infrastructure", "Infrastructure\Phenix.Challenge.Infrastructure\Phenix.Challenge.Infrastructure.csproj", "{233DC5DA-DA54-4CB7-A937-D543BCC741AA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{035A6BF9-1776-4613-941A-8ED0596CF758}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Tests", "Infrastructure\Tests\Infrastructure.Tests\Infrastructure.Tests.csproj", "{283C26DD-6BFD-4DA4-ACA2-1D2AF1D47CF5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Tests", "Infrastructure\Tests\Infrastructure.Tests\Infrastructure.Tests.csproj", "{283C26DD-6BFD-4DA4-ACA2-1D2AF1D47CF5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{6A3FC3C6-2C0E-411D-B24C-3A7945D89836}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phenix.Challenge.Application", "Application\Phenix.Challenge.Application\Phenix.Challenge.Application.csproj", "{2EE6AA54-5E9E-4C38-BEFB-3DB08252F036}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +73,10 @@ Global
 		{283C26DD-6BFD-4DA4-ACA2-1D2AF1D47CF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{283C26DD-6BFD-4DA4-ACA2-1D2AF1D47CF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{283C26DD-6BFD-4DA4-ACA2-1D2AF1D47CF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EE6AA54-5E9E-4C38-BEFB-3DB08252F036}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EE6AA54-5E9E-4C38-BEFB-3DB08252F036}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EE6AA54-5E9E-4C38-BEFB-3DB08252F036}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EE6AA54-5E9E-4C38-BEFB-3DB08252F036}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -81,6 +89,7 @@ Global
 		{233DC5DA-DA54-4CB7-A937-D543BCC741AA} = {3694693B-5407-4E43-9162-3BA4CAC50E1E}
 		{035A6BF9-1776-4613-941A-8ED0596CF758} = {3694693B-5407-4E43-9162-3BA4CAC50E1E}
 		{283C26DD-6BFD-4DA4-ACA2-1D2AF1D47CF5} = {035A6BF9-1776-4613-941A-8ED0596CF758}
+		{2EE6AA54-5E9E-4C38-BEFB-3DB08252F036} = {6A3FC3C6-2C0E-411D-B24C-3A7945D89836}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9C0B9CBC-8029-4AD8-BBE0-D17260F9044C}
