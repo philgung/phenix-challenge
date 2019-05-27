@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Application\Phenix.Challenge.Application\Phenix.Challenge.Application.csproj" />
-    <ProjectReference Include="..\Domain\Phenix.Challenge.Domain\Phenix.Challenge.Domain.csproj" />
     <ProjectReference Include="..\Infrastructure\Phenix.Challenge.Infrastructure\Phenix.Challenge.Infrastructure.csproj" />
   </ItemGroup>
 

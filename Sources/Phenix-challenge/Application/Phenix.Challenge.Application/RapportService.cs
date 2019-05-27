@@ -59,5 +59,49 @@ namespace Phenix.Challenge.Application
             return rapport.Obtenir100PlusGrosChiffreDAffaireParMagasin(magasin);
         }
 
+        // Concurrent
+        public IEnumerable<(int ProduitId, int QuantiteTotal)> Obtenir100MeilleursVentesJournaliereEnGeneralConcurrent(DateTime dateDuJour)
+        {
+            var rapport = new Rapport(dateDuJour, dateDuJour, dossierRacine, lecteurFichier);
+            return rapport.Obtenir100MeilleursVentesEnGeneralConcurrent();
+        }
+
+        public IEnumerable<(int ProduitId, decimal ChiffreDAffaire)> Obtenir100PlusGrosChiffreDAffaireJournaliereEnGeneralConcurrent(DateTime dateDuJour)
+        {
+            var rapport = new Rapport(dateDuJour, dateDuJour, dossierRacine, lecteurFichier);
+            return rapport.Obtenir100PlusGrosChiffreDAffaireEnGeneralConcurrent();
+        }
+        public IEnumerable<(int ProduitId, int QuantiteTotal)> Obtenir100MeilleursVentesJournaliereParMagasinConcurrent(DateTime dateDuJour, Guid magasin)
+        {
+            var rapport = new Rapport(dateDuJour, dateDuJour, dossierRacine, lecteurFichier);
+            return rapport.Obtenir100MeilleursVentesParMagasinConcurrent(magasin);
+        }
+        public IEnumerable<(int ProduitId, decimal ChiffreDAffaire)> Obtenir100PlusGrosChiffreDAffaireJournaliereParMagasinConcurrent(DateTime dateDuJour, Guid magasin)
+        {
+            var rapport = new Rapport(dateDuJour, dateDuJour, dossierRacine, lecteurFichier);
+            return rapport.Obtenir100PlusGrosChiffreDAffaireParMagasinConcurrent(magasin);
+        }
+
+        public IEnumerable<(int ProduitId, int QuantiteTotal)> Obtenir100MeilleursVentesHebdomadaireEnGeneralConcurrent(DateTime dateDuJour)
+        {
+            var rapport = new Rapport(dateDuJour.AddDays(-7), dateDuJour, dossierRacine, lecteurFichier);
+            return rapport.Obtenir100MeilleursVentesEnGeneralConcurrent();
+        }
+        public IEnumerable<(int ProduitId, decimal ChiffreDAffaire)> Obtenir100PlusGrosChiffreDAffaireHebdomadaireEnGeneralConcurrent(DateTime dateDuJour)
+        {
+            var rapport = new Rapport(dateDuJour.AddDays(-7), dateDuJour, dossierRacine, lecteurFichier);
+            return rapport.Obtenir100PlusGrosChiffreDAffaireEnGeneralConcurrent();
+        }
+        public IEnumerable<(int ProduitId, int QuantiteTotal)> Obtenir100MeilleursVentesHebdomadaireParMagasinConcurrent(DateTime dateDuJour, Guid magasin)
+        {
+            var rapport = new Rapport(dateDuJour.AddDays(-7), dateDuJour, dossierRacine, lecteurFichier);
+            return rapport.Obtenir100MeilleursVentesParMagasinConcurrent(magasin);
+        }
+        public IEnumerable<(int ProduitId, decimal ChiffreDAffaire)> Obtenir100PlusGrosChiffreDAffaireHebdomadaireParMagasinConcurrent(DateTime dateDuJour, Guid magasin)
+        {
+            var rapport = new Rapport(dateDuJour.AddDays(-7), dateDuJour, dossierRacine, lecteurFichier);
+            return rapport.Obtenir100PlusGrosChiffreDAffaireParMagasinConcurrent(magasin);
+        }
+
     }
 }

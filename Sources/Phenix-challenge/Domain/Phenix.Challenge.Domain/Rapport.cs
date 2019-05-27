@@ -7,6 +7,7 @@ using System.Text;
 
 namespace Phenix.Challenge.Domain
 {
+    // singleton ??
     public class Rapport
     {
         IEnumerable<Transaction> _transactions;
@@ -77,6 +78,47 @@ namespace Phenix.Challenge.Domain
                 .OrderByDescending(x => x.ChiffreAffaire);
             return plusGrosCA.Take(100);
         }
+
+
+
+        public IEnumerable<(int ProduitId, int QuantiteTotal)> Obtenir100MeilleursVentesEnGeneralConcurrent()
+        {
+            return Filtrer100MeilleursVentesConcurrent(_transactions);
+        }
+
+        public IEnumerable<(int ProduitId, decimal ChiffreDAffaire)> Obtenir100PlusGrosChiffreDAffaireEnGeneralConcurrent()
+        {
+            return Filtrer100PlusGrosChiffreDAffaireConcurrent(_transactions);
+        }
+
+        public IEnumerable<(int ProduitId, int QuantiteTotal)> Obtenir100MeilleursVentesParMagasinConcurrent(Guid magasin)
+        {
+            return Filtrer100MeilleursVentesConcurrent(_transactions.Where(t => t.Magasin == magasin));
+        }
+
+        public IEnumerable<(int ProduitId, decimal ChiffreDAffaire)> Obtenir100PlusGrosChiffreDAffaireParMagasinConcurrent(Guid magasin)
+        {
+            return Filtrer100PlusGrosChiffreDAffaireConcurrent(_transactions.Where(t => t.Magasin == magasin));
+        }
+
+        private IEnumerable<(int ProduitId, int QuantiteTotal)> Filtrer100MeilleursVentesConcurrent(IEnumerable<Transaction> transactions)
+        {
+            var meilleursVente = transactions.GroupBy(t => t.ProduitId).AsParallel().WithDegreeOfParallelism(4)
+                .Select(g => (ProduitId: g.Key, QuantiteTotal: g.Sum(t => t.Quantite)))
+                .OrderByDescending(x => x.QuantiteTotal);
+
+            return meilleursVente.Take(100);
+        }
+
+        private IEnumerable<(int ProduitId, decimal ChiffreDAffaire)> Filtrer100PlusGrosChiffreDAffaireConcurrent(IEnumerable<Transaction> transactions)
+        {
+            var plusGrosCA = transactions.GroupBy(t => t.ProduitId)
+                .AsParallel().WithDegreeOfParallelism(4)
+                .Select(g => (ProduitId: g.Key, ChiffreAffaire: g.Sum(t => t.Quantite * ObtenirPrixUnitaire(t.ProduitId, t.Magasin))))
+                .OrderByDescending(x => x.ChiffreAffaire);
+            return plusGrosCA.Take(100);
+        }
+
 
         private decimal ObtenirPrixUnitaire(int produitId, Guid magasin)
         {

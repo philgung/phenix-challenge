@@ -37,7 +37,7 @@ namespace Phenix.Challenge.Infrastructure
             return lignes.Select(ligne => impl(ligne));
         }
 
-        public IDictionary<Guid, IEnumerable<ReferentielProduit>> LitReferentielsProduitDUnePeriode(string dossierRacine, DateTime dateDeDebut, DateTime dateDeFin)
+        public virtual IDictionary<Guid, IEnumerable<ReferentielProduit>> LitReferentielsProduitDUnePeriode(string dossierRacine, DateTime dateDeDebut, DateTime dateDeFin)
         {
             var referentielsParMagasin = new Dictionary<Guid, IEnumerable<ReferentielProduit>>();
 
@@ -55,7 +55,7 @@ namespace Phenix.Challenge.Infrastructure
             return referentielsParMagasin;
         }
 
-        public IEnumerable<Transaction> LitTransactionsDUnePeriode(string dossierRacine, DateTime dateDeDebut, DateTime dateDeFin)
+        public virtual IEnumerable<Transaction> LitTransactionsDUnePeriode(string dossierRacine, DateTime dateDeDebut, DateTime dateDeFin)
         {
             var transactions = new List<Transaction>();
 
